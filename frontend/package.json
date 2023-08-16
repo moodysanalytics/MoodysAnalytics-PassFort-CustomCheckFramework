@@ -1,0 +1,55 @@
+{
+  "name": "openSourceCustomCheck",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@passfort/castle": "^0.1.7-alpha.634",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.23",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "^16.8.3",
+    "axios": "^1.3.6",
+    "http-proxy-middleware": "^2.0.6",
+    "jwt-decode": "^3.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^6.10.0",
+    "react-scripts": "5.0.1",
+    "typescript": "4.4.4",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "PORT=8000 react-scripts start",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .ts,.tsx ."
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/react-helmet": "^6.1.6",
+    "prettier": "^2.8.8"
+  }
+}

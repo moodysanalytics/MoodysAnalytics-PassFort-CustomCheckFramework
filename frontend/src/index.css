@@ -1,0 +1,32 @@
+.dropdown-header {
+    border-radius: 0 0 3px 3px;
+}
+
+.dropdown-header-cell {
+    border-radius: 0 0 3px 0;
+}
+
+.dropdown-details>:first-child {
+    border-radius: 3px 3px 0 0;
+}
+
+.dropdown-details>:last-child .dropdown-cell {
+    border-radius: 0 0 3px 0;
+}
+
+.dropdown-details>:last-child .dropdown-cell-left {
+    border-radius: 0 0 0 3px;
+}
+
+.dropdown-details>:last-child {
+    border-radius: 0 0 3px 3px;
+}
+
+.Question:first-of-type {
+    border-radius: 3px 3px 0 0;
+    border-top: "1px";
+}
+
+.FAQ:last-child {
+    border-radius: 0 0 3px 3px;
+}
