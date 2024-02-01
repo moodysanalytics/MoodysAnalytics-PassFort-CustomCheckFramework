@@ -37,5 +37,3 @@ const App = () => {
 };
 
 export default App;
-
-{/* <img src="./diagramJPEGs/Slide1.jpeg"/> */}

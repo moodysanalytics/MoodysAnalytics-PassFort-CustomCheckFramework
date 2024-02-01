@@ -18,5 +18,5 @@ const rootConfig = ConfigModule.forRoot({
   controllers: [PassFortIntegrationController, PassFortIFrameController],
   providers: [PassFortIntegrationService, PassFortIFrameService],
 })
-// do we still need this "FixPassFortSignatureMiddleware"
+
 export class AppModule {}

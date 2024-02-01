@@ -12,12 +12,9 @@ import {
   ProviderError,
   UnsupportedDemoResult,
 } from '../types/app_exception';
-import config = require('../../static/config.js');
-import metadata = require('../../static/metadata.js');
 import { DemoResultType } from 'src/types';
 
-// TODO Austin McKee: We may not need this to be an async function
-const runDemoCheck = async (demoResult: string): Promise<CheckResponse> => {
+const runDemoCheck = (demoResult: string): CheckResponse => {
   switch (demoResult) {
     case DemoResultType.ANY:
     case DemoResultType.ANY_CHARGE:
@@ -47,10 +44,9 @@ const runDemoCheck = async (demoResult: string): Promise<CheckResponse> => {
         responsePlain.external_resources[0].label = 'Example link';
       }
 
-      // TODO Austin McKee: We likely can simplfy this to use something other than plainToClass
       const response = plainToClass(CheckResponse, responsePlain);
 
-      await validateOrReject(response).catch(() => {
+      validateOrReject(response).catch(() => {
         throw new InvalidResponse();
       });
       return response;

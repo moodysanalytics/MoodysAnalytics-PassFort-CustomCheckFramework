@@ -20,7 +20,7 @@ import {
   Signed,
   VerifySignatureGuard,
 } from '@holmesmr/nest-http-sig';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import { AuthService } from '../auth/auth.service';
 import { ConfigType } from '@nestjs/config';
 import appConfig from '../config/app.config';
@@ -33,7 +33,6 @@ import { signAndVerify } from '../utils/debug.helpers';
 export class PassFortIntegrationController {
   constructor(
     @Inject(appConfig.KEY)
-    private readonly config: ConfigType<typeof appConfig>,
     private readonly passFortIntegrationService: PassFortIntegrationService,
     private readonly authService: AuthService,
   ) {}

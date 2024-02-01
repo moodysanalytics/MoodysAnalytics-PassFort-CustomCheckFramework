@@ -11,8 +11,6 @@ export class AppException extends Error {
   }
 }
 
-// Can we nix this altogether if there is no external API connection?
-// Listed as required in API docs...
 export class ProviderConnectionError extends AppException {
   constructor() {
     super(

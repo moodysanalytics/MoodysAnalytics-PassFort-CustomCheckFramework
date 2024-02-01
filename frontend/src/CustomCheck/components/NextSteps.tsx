@@ -1,6 +1,3 @@
-// brief paragraph, and reference back to readme where instructions are for the
-// mini frontend react app that will contain the diagramSlides
-
 import React from 'react';
 import { Box, H4, Text, Link } from '@passfort/castle';
 

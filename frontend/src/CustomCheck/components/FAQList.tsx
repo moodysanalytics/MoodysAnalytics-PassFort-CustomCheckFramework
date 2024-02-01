@@ -1,5 +1,3 @@
-// FAQ section with drop downs a la category drop downs
-
 import React from 'react';
 import { H4, Box } from '@passfort/castle';
 import { FAQs, FAQtype } from '../../Types/FAQtype';

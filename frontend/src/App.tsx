@@ -9,9 +9,8 @@ import {
 } from 'react-router-dom';
 import { dataLoader } from './DataLoader';
 import CustomCheck from './CustomCheck';
-import GeneralError from './Errors/GeneralError'; // need to edit
+import GeneralError from './Errors/GeneralError';
 
-// leaving in reactRouter for now, can remove if too fluffy
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
@@ -27,7 +26,7 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const token = sessionStorage.getItem('token'); // is this needed?
+  const token = sessionStorage.getItem('token');
 
   return (
     <ThemeProvider>
@@ -35,7 +34,5 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export const cacheBust = 'foo'; // ?
 
 export default App;

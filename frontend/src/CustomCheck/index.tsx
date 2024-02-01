@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex } from '@passfort/castle';
+import { Box } from '@passfort/castle';
 import { useLoaderData } from 'react-router';
 import Congrats from './components/Congrats';
 import DocsAndResources from './components/DocsAndResources';

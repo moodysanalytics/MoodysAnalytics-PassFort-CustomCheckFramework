@@ -14,7 +14,7 @@ const createSymmetricKey = ({
 }: {
   value: string;
   encoding: 'hex' | 'base64';
-}) => crypto.createSecretKey(Buffer.from(value, encoding)); // why do we need to buffer this?
+}) => crypto.createSecretKey(Buffer.from(value, encoding)); 
 export const keyLookupProvider = {
   provide: SIGNATURE_KEY_LOOKUP,
   useFactory: (
