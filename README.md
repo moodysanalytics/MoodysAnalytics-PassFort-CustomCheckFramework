@@ -21,7 +21,6 @@ The core documentation is avaliable here: [PassFort API Reference](https://passf
 
 In order to use a custom check you must satisfy the following conditions:
 
-- You must have access to Orbis, the entity metatdata database used by PassFort.
 - You must generate a 32 byte key secret key ([more info here](https://passfort.github.io/integration-docs/?javascript#authentication)).
   - You can use the following formula in a linux/mac terminal:
     - `§ dd if=/dev/urandom bs=32 count=1 2>/dev/null | base64`
