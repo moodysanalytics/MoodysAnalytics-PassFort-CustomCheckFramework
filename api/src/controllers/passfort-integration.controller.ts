@@ -39,6 +39,8 @@ export class PassFortIntegrationController {
 
   @Get('/')
   getMetadata() {
+    console.log('hit metadata endpoint')
+    console.log('this.passFortIntegrationService.getMetadata:', this.passFortIntegrationService.getConfig);
     return this.passFortIntegrationService.getMetadata();
   }
 

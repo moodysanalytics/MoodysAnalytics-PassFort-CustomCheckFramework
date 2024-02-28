@@ -26,10 +26,10 @@ const runDemoCheck = (demoResult: string): CheckResponse => {
         errors: [],
         external_resources: [
           {
-            type: 'EMBED',
+            type: (process.env.CHECK_TYPE as string) || 'EMBED',
             url: `url_for_redirect/query_param_appended_here`,
             id: '00000000-0000-0000-0000-000000000000',
-            label: 'Example embed',
+            label: 'Example check',
           },
         ],
         result: {
@@ -90,7 +90,7 @@ const createResponseObject = async (
     errors: [],
     external_resources: [
       {
-        type: process.env.CHECK_TYPE || 'EMBED',
+        type: (process.env.CHECK_TYPE as string) || 'EMBED',
         url: getExternalUrl(metadata.bvd_id),
         id: checkRequest.id,
         label: 'Demo Check Result',

@@ -19,7 +19,7 @@ const ONE_TIME_CONFIG = {
   ],
   // allows iFrame injection
   supported_features: [
-      "EXTERNAL_EMBED"
+      "EXTERNAL_LINK", // was EXTERNAL EMBED
   ],
   /*
   insert any credentials that PassFort should collect when 
