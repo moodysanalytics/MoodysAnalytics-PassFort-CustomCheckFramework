@@ -33,14 +33,13 @@ import { signAndVerify } from '../utils/debug.helpers';
 export class PassFortIntegrationController {
   constructor(
     @Inject(appConfig.KEY)
+    private readonly config: ConfigType<typeof appConfig>,
     private readonly passFortIntegrationService: PassFortIntegrationService,
     private readonly authService: AuthService,
   ) {}
 
   @Get('/')
   getMetadata() {
-    console.log('hit metadata endpoint')
-    console.log('this.passFortIntegrationService.getMetadata:', this.passFortIntegrationService.getConfig);
     return this.passFortIntegrationService.getMetadata();
   }
 

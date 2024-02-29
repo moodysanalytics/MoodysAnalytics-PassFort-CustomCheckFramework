@@ -16,12 +16,9 @@ export class PassFortIntegrationService {
   constructor(
     @Inject(appConfig.KEY)
     private readonly config: ConfigType<typeof appConfig>,
-  ) {
-    console.log('PassFortIntegrationService created. here is instance.getMetadata:', this.getMetadata);
-  }
+  ) {}
 
   getMetadata() {
-    console.log('hit getMetadata endpoint')
     return META_DATA;
   }
 
