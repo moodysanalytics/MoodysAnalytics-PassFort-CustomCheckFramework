@@ -31,11 +31,9 @@ import { signAndVerify } from '../utils/debug.helpers';
 @UseInterceptors(SignResponseInterceptor)
 @Controller()
 export class PassFortIntegrationController {
-  constructor(
-    @Inject(appConfig.KEY)
-    private readonly passFortIntegrationService: PassFortIntegrationService,
-    private readonly authService: AuthService,
-  ) {}
+  @Inject(PassFortIntegrationService)
+  private passFortIntegrationService: PassFortIntegrationService;
+  @Inject(AuthService) private authService: AuthService;
 
   @Get('/')
   getMetadata() {
