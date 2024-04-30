@@ -37,12 +37,9 @@ This request is validated by your API through our VerifySignatureGuard before be
 
 PassFort expects a specific format for any check response, which is defined in [the documentation](https://passfort.github.io/integration-docs/?javascript#demo-checks). We've included a function createResponseObject in the api/src/utils/pf-integration.helpers.ts file which builds this formatted response. This response includes a 'result' property which let's PassFort know to display Pass/Fail/Partial, and an 'external_resources' property where you can pass on a link to your applications frontend which can then be embedded within PassFort.
 
-PassFort digests your API's response, displays the check results to the user, and calls your provided embed link to display your UI as an iFrame within PassFort. For security, we use a two step process here involving an HTML intermediary and the tokenization of your encoded endpoint/auth information. This lilypad gives us a safe way to finally display your UI within our PassFort environment. It's common to include an identifier of some kind in your embed url as a query parameter- this index allows your API to access any data that was captured for that given entity or check.
+PassFort digests your API's response, displays the check results to the user, and displays a link you provide to your UI (or, with PassFort permission, calls your provided embed link to display your UI as an iFrame within PassFort). For security, we use a two step process here involving an HTML intermediary and the tokenization of your encoded endpoint/auth information. This lilypad gives us a safe way to finally link out to (or display) your UI within our PassFort environment. It's common to include an identifier of some kind in your embed url as a query parameter- this index allows your API to access any data that was captured for that given entity or check.
 
 ## Getting Started
-
-[EMBED]/[LINK]: this denotes steps which apply only to their respective check type, EMBED or LINK.
-Unless explicitly approved by PassFort, use the LINK check type (provides a link to your UI alongside the check result within PassFort).
 
 LOCALLY - verify that this check is working on your local machine
 
@@ -127,7 +124,7 @@ IN PASSFORT - get this basic check passing all validation and visible in PassFor
 11. View Profile
     - Navigate to your newly created profile
     - Under 'Due Diligence Tasks' in the left hand panel, you should see your Custom Check.
-    - Select it, and view the check results and UI being rendered from your deployed application!
+    - Select it, and view the check results and link to UI (or embedded UI) being rendered from your deployed application!
 
 ## Next Steps
 
