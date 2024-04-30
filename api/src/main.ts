@@ -27,7 +27,7 @@ async function bootstrap() {
     }),
   );
   app.useGlobalFilters(
-    //new FallbackExceptionFilter(),
+    new FallbackExceptionFilter(),
     new HttpExceptionFilter(),
     new AppExceptionFilter(),
     new ValidationExceptionFilter(),

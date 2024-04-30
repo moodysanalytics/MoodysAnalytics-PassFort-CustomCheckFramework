@@ -17,9 +17,9 @@ const ONE_TIME_CONFIG = {
   },
   supported_countries: ['USA', 'GBR'
   ],
-  // allows iFrame injection
+  // allows Link out to UI or iFrame injection of UI
   supported_features: [
-      "EXTERNAL_LINK", // was EXTERNAL EMBED
+      process.env.CHECK_TYPE === "LINK" ? "EXTERNAL_LINK" : "EXTERNAL_EMBED"
   ],
   /*
   insert any credentials that PassFort should collect when 

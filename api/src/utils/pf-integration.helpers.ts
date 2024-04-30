@@ -26,7 +26,7 @@ const runDemoCheck = (demoResult: string): CheckResponse => {
         errors: [],
         external_resources: [
           {
-            type: (process.env.CHECK_TYPE as string) || 'EMBED',
+            type: (process.env.CHECK_TYPE as string) || 'LINK',
             url: `url_for_redirect/query_param_appended_here`,
             id: '00000000-0000-0000-0000-000000000000',
             label: 'Example check',
@@ -40,8 +40,8 @@ const runDemoCheck = (demoResult: string): CheckResponse => {
       responsePlain.external_resources[0].url = getExternalUrl('1');
 
       if (demoResult === DemoResultType.EXTERNAL_RESOURCE_LINK) {
-        responsePlain.external_resources[0].type = 'LINK';
-        responsePlain.external_resources[0].label = 'Example link';
+        responsePlain.external_resources[0].type = (process.env.CHECK_TYPE as string) ||'LINK';
+        responsePlain.external_resources[0].label = (process.env.CHECK_TYPE as string) === 'EMBED' ? 'Example embed' : 'Example link';
       }
 
       const response = plainToClass(CheckResponse, responsePlain);
