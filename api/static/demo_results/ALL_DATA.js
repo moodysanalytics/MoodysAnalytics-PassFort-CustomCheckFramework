@@ -4,10 +4,10 @@ export const ALL_DATA = {
   "errors": [],
   "external_resources": [
      {
-      "type": "EMBED",
+      "type": process.env.CHECK_TYPE || "LINK",
       "url": "url_for_redirect/query_param_appended_here",
       "id": "8AA89547-89FC-4EAD-ACEC-FFA36F451337",
-      "label": "Example embed"
+      "label": process.env.CHECK_TYPE === 'EMBED' ? 'Example embed' : 'Example link'
      }
   ],
   "result": {

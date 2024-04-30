@@ -21,7 +21,6 @@ The core documentation is avaliable here: [PassFort API Reference](https://passf
 
 In order to use a custom check you must satisfy the following conditions:
 
-- You must have access to Orbis, the entity metatdata database used by PassFort.
 - You must generate a 32 byte key secret key ([more info here](https://passfort.github.io/integration-docs/?javascript#authentication)).
   - You can use the following formula in a linux/mac terminal:
     - `§ dd if=/dev/urandom bs=32 count=1 2>/dev/null | base64`
@@ -38,7 +37,7 @@ This request is validated by your API through our VerifySignatureGuard before be
 
 PassFort expects a specific format for any check response, which is defined in [the documentation](https://passfort.github.io/integration-docs/?javascript#demo-checks). We've included a function createResponseObject in the api/src/utils/pf-integration.helpers.ts file which builds this formatted response. This response includes a 'result' property which let's PassFort know to display Pass/Fail/Partial, and an 'external_resources' property where you can pass on a link to your applications frontend which can then be embedded within PassFort.
 
-PassFort digests your API's response, displays the check results to the user, and calls your provided embed link to display your UI as an iFrame within PassFort. For security, we use a two step process here involving an HTML intermediary and the tokenization of your encoded endpoint/auth information. This lilypad gives us a safe way to finally display your UI within our PassFort environment. It's common to include an identifier of some kind in your embed url as a query parameter- this index allows your API to access any data that was captured for that given entity or check.
+PassFort digests your API's response, displays the check results to the user, and displays a link you provide to your UI (or, with PassFort permission, calls your provided embed link to display your UI as an iFrame within PassFort). For security, we use a two step process here involving an HTML intermediary and the tokenization of your encoded endpoint/auth information. This lilypad gives us a safe way to finally link out to (or display) your UI within our PassFort environment. It's common to include an identifier of some kind in your embed url as a query parameter- this index allows your API to access any data that was captured for that given entity or check.
 
 ## Getting Started
 
@@ -49,10 +48,11 @@ LOCALLY - verify that this check is working on your local machine
 3. Create a backend .env file based on our api/.env.example file, replacing anonymized placeholders with values that pertain to your instance.
    - DEBUG should be set to "true" for this LOCAL setup. This allows us to skip authorization that we'll need when we actually communicate with PassFort.
    - EXTERNAL_URL is the url that reaches your UI, we do not require this variable for local setup.
+   - CHECKTYPE
 4. Create an frontend .env file based on our frontend/.env.example file
    - REACT_APP_BASE_URL should be set equal to the url that your backend is running on (for local development, this should be the PORT in your backend .env appended to your localhost i.e. `http://localhost:3000`)
-   - This variable is plugged into the file at frontend/src/setupProxy.js , which allows us to access our application through a single endpoint by forwarding /api requests to our backend.
-   - This variable is also used in frontend/src/DataLoader.ts to get check-specific data from your backend to hydrate your UI upon render. This is where the index or identifier you appended to the url in your CheckResponse can be leveraged to access data that is specific to this entity or check.
+     - This variable is plugged into the file at frontend/src/setupProxy.js , which allows us to access our application through a single endpoint by forwarding /api requests to our backend.
+     - This variable is also used in frontend/src/DataLoader.ts to get check-specific data from your backend to hydrate your UI upon render. This is where the index or identifier you appended to the url in your CheckResponse can be leveraged to access data that is specific to this entity or check.
 5. Run your server by navigating to the api/ folder and running the npm run start:dev command.
 6. In another terminal session, navigate to your frontend/ folder and start your react server using npm run start.Insert the react server's address (likely `http://localhost:8000`) into the url, including an ID (`http://localhost:8000/1`).
    - This ID would later be grabbed from the url you send through PassFort in the embedded_resources property of your check response. This would identify the specific check your UI should display.
@@ -124,7 +124,7 @@ IN PASSFORT - get this basic check passing all validation and visible in PassFor
 11. View Profile
     - Navigate to your newly created profile
     - Under 'Due Diligence Tasks' in the left hand panel, you should see your Custom Check.
-    - Select it, and view the check results and UI being rendered from your deployed application!
+    - Select it, and view the check results and link to UI (or embedded UI) being rendered from your deployed application!
 
 ## Next Steps
 
