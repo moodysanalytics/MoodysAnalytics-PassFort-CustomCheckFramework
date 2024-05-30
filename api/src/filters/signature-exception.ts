@@ -7,37 +7,28 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ErrorResponse } from '../types/error_response';
-import { CheckErrorTypes } from '../types/error_response';
-import { IntegrationError } from '../types/error_response';
+import { handleSignatureException } from '../npmPackage/filters/signature.exception';
 
 @Catch(UnauthorizedException, BadRequestException, ForbiddenException)
 export class SignatureExceptionFilter implements ExceptionFilter {
-  catch(
-    exception: UnauthorizedException | BadRequestException,
-    host: ArgumentsHost,
-  ) {
+  catch(exception, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
-    const errors: IntegrationError[] = [
-      {
-        type: CheckErrorTypes.SIGNATURE_ERROR,
-        message: exception.message,
-      },
-    ];
+    /* 
+    need some logic here that converts the above Nest exceptions into generic exceptions so that the modularized 
+    package logic can determine the appropriate status code independent of the framework being used
+    */
 
-    const warnings = [];
-
+    const exceptionType = 'BadRequestException'; // or 'UnauthorizedException' or 'ForbiddenException
     if (exception instanceof UnauthorizedException) {
-      response.status(404);
-      response.json(new ErrorResponse(errors, warnings));
+      exception = 'UnauthorizedException';
     } else if (exception instanceof ForbiddenException) {
-      response.status(401);
-      response.json(new ErrorResponse(errors, warnings));
-    } else {
-      response.status(400);
-      response.json(new ErrorResponse(errors, warnings));
+      exception = 'ForbiddenException';
     }
+    
+    const { statusCode, errorResponse } = handleSignatureException(exception);
+
+    response.status(statusCode).json(errorResponse);
   }
 }
