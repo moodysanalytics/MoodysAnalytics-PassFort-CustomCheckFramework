@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Controller,
   Post,
   Req,
@@ -7,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { PassFortIFrameService } from '../services/passfort-iframe.service';
 import { AuthTokenGuard } from '../auth/auth-token.guard';
+import { BadRequestAppException } from 'src/types/app_exception';
 
 @Controller()
 export class PassFortIFrameController {
@@ -24,7 +24,7 @@ export class PassFortIFrameController {
       if (bvdId === request.token.result_id) {
         return this.passfortIFrameService.retrieveCheckData(bvdId);
       } else {
-        throw new BadRequestException();
+        throw new BadRequestAppException('Bad request error thrown while retrieving check data');
       }
     }
   }

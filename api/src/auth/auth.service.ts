@@ -1,10 +1,9 @@
 import {
-  BadRequestException,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
+import { BadRequestAppException, UnauthorizedAppException } from '../types/app_exception';
 
 @Injectable()
 export class AuthService {
@@ -41,13 +40,13 @@ export class AuthService {
       auditee_id === undefined ||
       signature === undefined
     ) {
-      throw new BadRequestException('Missing required query parameter(s)');
+      throw new BadRequestAppException('Missing required query parameter(s)');
     } else {
       const nowMilliseconds = Date.now();
       const validUntilMilliseconds = valid_until * 1000;
 
       if (nowMilliseconds > validUntilMilliseconds) {
-        throw new UnauthorizedException('Signature has expired');
+        throw new UnauthorizedAppException('Signature has expired');
       } else {
         const key = process.env.INTEGRATION_SECRET_KEY;
 
@@ -64,13 +63,13 @@ export class AuthService {
           valid = crypto.timingSafeEqual(bufferedSignature, ourSignature);
         } catch (e) {
           if (e instanceof RangeError) {
-            throw new UnauthorizedException('Signature is invalid');
+            throw new UnauthorizedAppException('Signature is invalid');
           }
           throw e;
         }
 
         if (!valid) {
-          throw new UnauthorizedException('Signature is invalid');
+          throw new UnauthorizedAppException('Signature is invalid');
         }
       }
     }

@@ -2,10 +2,10 @@ import {
   CanActivate,
   ExecutionContext,
   Injectable,
-  UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
+import { UnauthorizedAppException } from '../types/app_exception';
 
 @Injectable()
 export class AuthTokenGuard implements CanActivate {
@@ -14,13 +14,15 @@ export class AuthTokenGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const debug: string = process.env.DEBUG;
 
+    console.log('logging debug in auth token guard :', debug)
+
     if (debug === 'true') {
       return true;
     } else {
       const request = context.switchToHttp().getRequest();
       const token = this.extractTokenFromHeader(request);
       if (!token) {
-        throw new UnauthorizedException();
+        throw new UnauthorizedAppException('Missing token in header of request');
       }
       try {
         const payload = await this.jwtService.verifyAsync(token, {
@@ -30,7 +32,7 @@ export class AuthTokenGuard implements CanActivate {
         // so that we can access it in our route handlers
         request['token'] = payload;
       } catch {
-        throw new UnauthorizedException();
+        throw new UnauthorizedAppException('Invalid token in header of request');
       }
       return true;
     }

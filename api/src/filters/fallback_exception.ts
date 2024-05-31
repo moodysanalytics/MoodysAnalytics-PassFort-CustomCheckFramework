@@ -5,7 +5,8 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { handleFallbackException } from 'src/npmPackage/filters/fallback.exception';
+import { handleAppException } from 'src/npmPackage/filters/app_exception';
+import { UnknownAppException } from 'src/npmPackage/types/app_exception.types';
 
 @Catch()
 export class FallbackExceptionFilter implements ExceptionFilter {
@@ -17,7 +18,10 @@ export class FallbackExceptionFilter implements ExceptionFilter {
 
     this.logger.error({ msg: 'Uncaught exception raised', exception });
 
-    const { statusCode, errorResponse } = handleFallbackException();
+    const formattedException = new UnknownAppException(exception.message);
+
+    const { statusCode, errorResponse } = handleAppException(formattedException);
     response.status(statusCode).json(errorResponse)
   }
 }
+

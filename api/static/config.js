@@ -28,7 +28,7 @@ const ONE_TIME_CONFIG = {
   */
   credentials: { 
     fields: [{ 
-      type: 'required_field',
+      type: 'string',
       name: 'some_user_specific_ID',
       label: 'User_ID_for_custom_check',
     }

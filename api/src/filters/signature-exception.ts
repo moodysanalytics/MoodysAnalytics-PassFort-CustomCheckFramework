@@ -3,31 +3,30 @@ import {
   Catch,
   ArgumentsHost,
   ForbiddenException,
-  UnauthorizedException,
-  BadRequestException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { handleSignatureException } from '../npmPackage/filters/signature.exception';
+import { BadRequestAppException, ForbiddenAppException, UnauthorizedAppException } from 'src/npmPackage/types/app_exception.types';
+import { handleAppException } from 'src/npmPackage/filters/app_exception';
 
-@Catch(UnauthorizedException, BadRequestException, ForbiddenException)
+@Catch(UnauthorizedAppException, BadRequestAppException, ForbiddenException)
 export class SignatureExceptionFilter implements ExceptionFilter {
   catch(exception, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
     /* 
-    need some logic here that converts the above Nest exceptions into generic exceptions so that the modularized 
-    package logic can determine the appropriate status code independent of the framework being used
+    Becuase we are using { VerifySignatureGuard } from '@holmesmr/nest-http-sig' to protect our routes,
+    we throw a nestjs UnauthorizedException when the signature is invalid.
+
+    Ideally we would use the express implmentation of @holmesmr/http-sig, but for expediency I am adding the below conditional
+    to catch and convert that exception into one of our modularized excpetion classes. 
     */
 
-    const exceptionType = 'BadRequestException'; // or 'UnauthorizedException' or 'ForbiddenException
-    if (exception instanceof UnauthorizedException) {
-      exception = 'UnauthorizedException';
-    } else if (exception instanceof ForbiddenException) {
-      exception = 'ForbiddenException';
+    if (exception instanceof ForbiddenException) {
+        exception = new ForbiddenAppException();
     }
     
-    const { statusCode, errorResponse } = handleSignatureException(exception);
+    const { statusCode, errorResponse } = handleAppException(exception);
 
     response.status(statusCode).json(errorResponse);
   }

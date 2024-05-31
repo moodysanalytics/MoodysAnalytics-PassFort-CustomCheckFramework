@@ -7,7 +7,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from './filters/http-exception';
 import { SignatureExceptionFilter } from './filters/signature-exception';
 import { FallbackExceptionFilter } from './filters/fallback_exception';
-import { ValidationExceptionFilter } from './filters/validation-exception';
+//import { ValidationExceptionFilter } from './filters/validation-exception';
 import { AppExceptionFilter } from './filters/app-exception.filter';
 import appConfig from './config/app.config';
 import { ConfigType } from '@nestjs/config';
@@ -30,7 +30,7 @@ async function bootstrap() {
     new FallbackExceptionFilter(),
     new HttpExceptionFilter(),
     new AppExceptionFilter(),
-    new ValidationExceptionFilter(),
+    //new ValidationExceptionFilter(),
     new SignatureExceptionFilter(),
   );
   await app.listen(config.port);
