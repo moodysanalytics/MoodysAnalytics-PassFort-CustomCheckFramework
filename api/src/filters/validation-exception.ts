@@ -23,7 +23,8 @@ export class ValidationExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
-    handleValidationException(exception, response);
+    const { statusCode, errorResponse } = handleValidationException(exception);
+    response.status(statusCode).json(errorResponse)
     this.logger.error(exception.message, exception.stack);
   }
 }

@@ -1,15 +1,16 @@
 import {
     CheckErrorTypes,
     ErrorResponse,
-    IntegrationError,
+    IntegrationError
   } from '../../types/error_response';
+  import { Decision } from 'src/types/check_response';
 
 
-export const handleValidationException = (exception, response = null) => {
-    const errors = [];
+export const handleValidationException = (exception) => {
+    const errors: IntegrationError[] = [];
     let result = null;
     let providerData = null;
-    let statusCode = HttpStatus.OK; // Default status code
+    let statusCode = 200; // Default status code is http OK
   
     switch (exception.message) {
       case CheckErrorTypes.MISSING_QUERY_PARAMS:
@@ -17,7 +18,7 @@ export const handleValidationException = (exception, response = null) => {
           type: CheckErrorTypes.MISSING_QUERY_PARAMS,
           message: 'Missing required query parameter',
         });
-        statusCode = HttpStatus.BAD_REQUEST;
+        statusCode = 400; // Bad request
         break;
   
       case CheckErrorTypes.UNSUPPORTED_DEMO_RESULT:
@@ -42,9 +43,6 @@ export const handleValidationException = (exception, response = null) => {
   
     const warnings = [];
   
-    if (response) {
-      response.status(statusCode).json(new ErrorResponse(errors, warnings, providerData, result));
-    } else {
+
       return { statusCode, errorResponse: new ErrorResponse(errors, warnings, providerData, result) };
-    }
   }

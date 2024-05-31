@@ -3,14 +3,9 @@ import {
   Catch,
   ArgumentsHost,
   HttpException,
-  HttpStatus,
 } from '@nestjs/common';
 import { Response } from 'express';
-import {
-  CheckErrorTypes,
-  ErrorResponse,
-  IntegrationError,
-} from '../types/error_response';
+import { handleHTTPException } from 'src/npmPackage/filters/http.exception';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -18,16 +13,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
 
-    const errors: IntegrationError[] = [
-      {
-        type: CheckErrorTypes.PROVIDER_CONNECTION,
-        message: 'Http error occurred',
-      },
-    ];
-
-    const warnings = [];
-
-    response.status(HttpStatus.OK);
-    response.json(new ErrorResponse(errors, warnings));
+    const { statusCode, errorResponse } = handleHTTPException();
+    response.status(statusCode).json(errorResponse)
   }
 }
