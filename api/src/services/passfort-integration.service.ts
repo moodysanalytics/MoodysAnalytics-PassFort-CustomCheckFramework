@@ -1,15 +1,15 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CheckRequest } from '../types/check_request';
-import { CheckResponse } from '../types/check_response';
+import { CheckRequest } from '../types/check_request.js';
+import { CheckResponse } from '../types/check_response.js';
 import { Request } from 'express';
-import appConfig from '../config/app.config';
+import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
-import ONE_TIME_CONFIG = require('../../static/config.js');
-import META_DATA = require('../../static/metadata.js');
+import { ONE_TIME_CONFIG } from '../../static/config.js';
+import { META_DATA } from '../../static/metadata.js';
 import {
   runDemoCheck,
   createResponseObject,
-} from 'src/utils/pf-integration.helpers';
+} from '../utils/pf-integration.helpers.js';
 
 @Injectable()
 export class PassFortIntegrationService {

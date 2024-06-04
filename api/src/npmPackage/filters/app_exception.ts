@@ -1,5 +1,5 @@
-import { AppException } from '../types/app_exception.types';
-import { ErrorResponse, IntegrationError } from '../types/error_response.types';
+import { AppException } from '../types/app_exception.types.js';
+import { ErrorResponse, IntegrationError } from '../types/error_response.types.js';
 
 export const handleAppException = (exception: AppException) => {
     const errors: IntegrationError[] = [{

@@ -1,4 +1,4 @@
-import { Metadata } from './check_request';
+import { Metadata } from './check_request.js';
 import { Type } from '@nestjs/class-transformer';
 import {
   IsArray,

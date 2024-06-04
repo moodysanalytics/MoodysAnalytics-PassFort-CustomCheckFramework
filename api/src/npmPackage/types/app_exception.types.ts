@@ -1,4 +1,4 @@
-import { CheckErrorTypes } from './error_response.types';
+import { CheckErrorTypes } from './error_response.types.js';
 
 export class AppException extends Error {
   constructor(

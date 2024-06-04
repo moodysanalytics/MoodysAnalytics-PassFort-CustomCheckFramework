@@ -6,7 +6,7 @@ import {
   SIGNATURE_KEY_LOOKUP,
   SignatureAlgorithm,
 } from '@holmesmr/nest-http-sig';
-import signaturesConfig from '../config/signatures.config';
+import signaturesConfig from '../config/signatures.config.js';
 import { ConfigType } from '@nestjs/config';
 const createSymmetricKey = ({
   value,

@@ -1,6 +1,6 @@
 import { Request } from 'express';
-import appConfig from '../config/app.config';
-import { AuthService } from '../auth/auth.service';
+import appConfig from '../config/app.config.js';
+import { AuthService } from '../auth/auth.service.js';
 
 const config = appConfig();
 

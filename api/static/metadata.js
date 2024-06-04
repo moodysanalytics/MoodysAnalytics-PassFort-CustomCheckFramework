@@ -1,9 +1,7 @@
-const META_DATA = {
+export const META_DATA = {
   protocol_version: 1,
   provider_name: "Your PF provider integration here" 
 }
-
-module.exports = META_DATA;
 
 /*
 

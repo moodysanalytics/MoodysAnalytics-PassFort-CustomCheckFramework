@@ -5,8 +5,8 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { BadRequestAppException, ForbiddenAppException, UnauthorizedAppException } from 'src/npmPackage/types/app_exception.types';
-import { handleAppException } from 'src/npmPackage/filters/app_exception';
+import { BadRequestAppException, ForbiddenAppException, UnauthorizedAppException } from '../npmPackage/types/app_exception.types.js';
+import { handleAppException } from '../npmPackage/filters/app_exception.js';
 
 @Catch(UnauthorizedAppException, BadRequestAppException, ForbiddenException)
 export class SignatureExceptionFilter implements ExceptionFilter {

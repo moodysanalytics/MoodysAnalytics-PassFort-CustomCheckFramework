@@ -3,7 +3,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
-import { BadRequestAppException, UnauthorizedAppException } from '../types/app_exception';
+import { BadRequestAppException, UnauthorizedAppException } from '../types/app_exception.js';
 
 @Injectable()
 export class AuthService {

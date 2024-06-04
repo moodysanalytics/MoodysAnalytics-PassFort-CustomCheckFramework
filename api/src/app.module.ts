@@ -1,13 +1,13 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { PassFortIntegrationController } from './controllers/passfort-integration.controller';
-import { PassFortIntegrationService } from './services/passfort-integration.service';
-import { SignaturesModule } from './signatures/signatures.module';
-import { FixPassFortSignatureMiddleware } from './fix-passfort-signature/fix-passfort-signature.middleware';
-import { AuthModule } from './auth/auth.module';
+import { PassFortIntegrationController } from './controllers/passfort-integration.controller.js';
+import { PassFortIntegrationService } from './services/passfort-integration.service.js';
+import { SignaturesModule } from './signatures/signatures.module.js';
+import { FixPassFortSignatureMiddleware } from './fix-passfort-signature/fix-passfort-signature.middleware.js';
+import { AuthModule } from './auth/auth.module.js';
 import { ConfigModule } from '@nestjs/config';
-import appConfig from './config/app.config';
-import { PassFortIFrameController } from './controllers/passfort-iframe.controller';
-import { PassFortIFrameService } from './services/passfort-iframe.service';
+import appConfig from './config/app.config.js';
+import { PassFortIFrameController } from './controllers/passfort-iframe.controller.js';
+import { PassFortIFrameService } from './services/passfort-iframe.service.js';
 
 const rootConfig = ConfigModule.forRoot({
   load: [appConfig],

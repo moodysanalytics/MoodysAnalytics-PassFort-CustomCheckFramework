@@ -5,8 +5,8 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { handleAppException } from 'src/npmPackage/filters/app_exception';
-import { HttpAppException } from 'src/types/app_exception';
+import { handleAppException } from '../npmPackage/filters/app_exception.js';
+import { HttpAppException } from '../types/app_exception.js';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {

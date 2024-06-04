@@ -1,9 +1,9 @@
-import { CheckRequest, ProviderConfig, Metadata } from '../types/check_request';
+import { CheckRequest, ProviderConfig, Metadata } from '../types/check_request.js';
 import { plainToClass } from '@nestjs/class-transformer';
 import { validateOrReject } from '@nestjs/class-validator';
-import { CheckResponse, Decision } from '../types/check_response';
-import { Result } from '../types/check_response';
-import appConfig from '../config/app.config';
+import { CheckResponse, Decision } from '../types/check_response.js';
+import { Result } from '../types/check_response.js';
+import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
 import {
   InvalidCredentials,
@@ -11,8 +11,8 @@ import {
   ProviderConnectionError,
   ProviderError,
   UnsupportedDemoResult,
-} from '../types/app_exception';
-import { DemoResultType } from 'src/types';
+} from '../types/app_exception.js';
+import { DemoResultType } from '../types/demo_result.types.js';
 
 const runDemoCheck = (demoResult: string): CheckResponse => {
   switch (demoResult) {

@@ -4,8 +4,8 @@ For more specific guidance and examples, see documentation here:
 https://passfort.github.io/integration-docs/?javascript#configuration
 
 */
-
-const ONE_TIME_CONFIG = {
+import 'dotenv/config';
+export const ONE_TIME_CONFIG = {
   check_type: "COMPANY_CUSTOM",
   check_template: {
     type: "ONE_TIME_SYNCHRONOUS",
@@ -51,5 +51,3 @@ const ONE_TIME_CONFIG = {
         }]
     }
 }
-
-module.exports = ONE_TIME_CONFIG;

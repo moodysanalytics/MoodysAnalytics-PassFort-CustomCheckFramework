@@ -5,8 +5,8 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { handleAppException } from 'src/npmPackage/filters/app_exception';
-import { UnknownAppException } from 'src/npmPackage/types/app_exception.types';
+import { handleAppException } from '../npmPackage/filters/app_exception.js';
+import { UnknownAppException } from '../npmPackage/types/app_exception.types.js';
 
 @Catch()
 export class FallbackExceptionFilter implements ExceptionFilter {

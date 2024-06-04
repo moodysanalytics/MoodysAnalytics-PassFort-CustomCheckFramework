@@ -4,9 +4,9 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { PassFortIFrameService } from '../services/passfort-iframe.service';
-import { AuthTokenGuard } from '../auth/auth-token.guard';
-import { BadRequestAppException } from 'src/types/app_exception';
+import { PassFortIFrameService } from '../services/passfort-iframe.service.js';
+import { AuthTokenGuard } from '../auth/auth-token.guard.js';
+import { BadRequestAppException } from '../types/app_exception.js';
 
 @Controller()
 export class PassFortIFrameController {
