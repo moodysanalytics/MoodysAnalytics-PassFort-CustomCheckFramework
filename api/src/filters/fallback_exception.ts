@@ -5,8 +5,6 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Response } from 'express';
-// import { handleAppException } from '../npmPackage/filters/app_exception.js';
-// import { UnknownAppException } from '../npmPackage/types/app_exception.types.js';
 import { handleAppException, UnknownAppException } from "@moodys/custom-check-helpers";
 
 @Catch()

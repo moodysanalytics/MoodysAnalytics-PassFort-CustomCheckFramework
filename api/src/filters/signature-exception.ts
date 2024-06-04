@@ -5,8 +5,6 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { Response } from 'express';
-// import { BadRequestAppException, ForbiddenAppException, UnauthorizedAppException } from '../npmPackage/types/app_exception.types.js';
-// import { handleAppException } from '../npmPackage/filters/app_exception.js';
 import { handleAppException, BadRequestAppException, ForbiddenAppException, UnauthorizedAppException } from "@moodys/custom-check-helpers";
 
 @Catch(UnauthorizedAppException, BadRequestAppException, ForbiddenException)

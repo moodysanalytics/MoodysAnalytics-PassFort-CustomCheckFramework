@@ -1,6 +1,5 @@
 import { ExceptionFilter, Catch, ArgumentsHost } from '@nestjs/common';
 import { Response } from 'express';
-// import { AppException } from '../types/app_exception.js';
 import { handleAppException, AppException } from "@moodys/custom-check-helpers";
 
 @Catch(AppException)

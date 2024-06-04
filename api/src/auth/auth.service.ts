@@ -3,7 +3,6 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
-// import { BadRequestAppException, UnauthorizedAppException } from '../types/app_exception.js';
 import { BadRequestAppException, UnauthorizedAppException } from '@moodys/custom-check-helpers';
 
 @Injectable()
