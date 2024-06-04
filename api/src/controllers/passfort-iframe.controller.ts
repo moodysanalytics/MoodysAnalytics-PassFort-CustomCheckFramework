@@ -6,7 +6,8 @@ import {
 } from '@nestjs/common';
 import { PassFortIFrameService } from '../services/passfort-iframe.service.js';
 import { AuthTokenGuard } from '../auth/auth-token.guard.js';
-import { BadRequestAppException } from '../types/app_exception.js';
+// import { BadRequestAppException } from '../types/app_exception.js';
+import { BadRequestAppException } from "@moodys/custom-check-helpers";
 
 @Controller()
 export class PassFortIFrameController {

@@ -5,13 +5,14 @@ import { CheckResponse, Decision } from '../types/check_response.js';
 import { Result } from '../types/check_response.js';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
-import {
-  InvalidCredentials,
-  InvalidResponse,
-  ProviderConnectionError,
-  ProviderError,
-  UnsupportedDemoResult,
-} from '../types/app_exception.js';
+// import {
+//   InvalidCredentials,
+//   InvalidResponse,
+//   ProviderConnectionError,
+//   ProviderError,
+//   UnsupportedDemoResult,
+// } from '../types/app_exception.js';
+import { InvalidCredentials, InvalidResponse, ProviderConnectionError, ProviderError, UnsupportedDemoResult } from "@moodys/custom-check-helpers";
 import { DemoResultType } from '../types/demo_result.types.js';
 
 const runDemoCheck = (demoResult: string): CheckResponse => {

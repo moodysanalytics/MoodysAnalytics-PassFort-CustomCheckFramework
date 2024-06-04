@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { UnauthorizedAppException } from '../types/app_exception.js';
+import { UnauthorizedAppException } from '@moodys/custom-check-helpers';
 
 @Injectable()
 export class AuthTokenGuard implements CanActivate {
@@ -13,8 +13,6 @@ export class AuthTokenGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const debug: string = process.env.DEBUG;
-
-    console.log('logging debug in auth token guard :', debug)
 
     if (debug === 'true') {
       return true;
