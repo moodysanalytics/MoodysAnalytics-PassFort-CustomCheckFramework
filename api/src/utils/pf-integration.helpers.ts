@@ -1,7 +1,7 @@
 import { CheckRequest, ProviderConfig, Metadata } from '../types/check_request.js';
 import { plainToClass } from '@nestjs/class-transformer';
 import { validateOrReject } from '@nestjs/class-validator';
-import { Result, CheckResponse, Decision } from '../npmPackage/types/OTS_CC_CheckResponse.js';
+import { Result, CheckResponse, Decision } from '@moodys/custom-check-helpers';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
 // import {

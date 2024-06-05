@@ -10,8 +10,8 @@ import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
-import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result } from '../npmPackage/formatters/OTS_CC_helpers.js';
-import { ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result } from '../npmPackage/types/OTS_CC_CheckResponse.js';
+import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result } from '@moodys/custom-check-helpers';
+import { ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result } from '@moodys/custom-check-helpers';
 
 @Injectable()
 export class PassFortIntegrationService {
