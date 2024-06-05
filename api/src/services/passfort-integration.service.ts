@@ -6,10 +6,10 @@ import { ConfigType } from '@nestjs/config';
 import { ONE_TIME_CONFIG } from '../../static/config.js';
 import { META_DATA } from '../../static/metadata.js';
 import {
-  runDemoCheck,
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
+import { runDemoCheck } from '../npmPackage/formatters/OTS_CC_helpers.js';
 import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result } from '@moodys/custom-check-helpers';
 import { ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result } from '@moodys/custom-check-helpers';
 
@@ -30,7 +30,13 @@ export class PassFortIntegrationService {
 
   async runChecks(req: Request, checkRequest: CheckRequest) {
     if (checkRequest.demo_result) {
-      return runDemoCheck(checkRequest.demo_result);
+
+      /*
+      To properly validate your demo check, you'll need a url that 
+      redirects to the correct desitination.
+      */
+     const demo_url: string = getExternalUrl('1');
+      return runDemoCheck(checkRequest.demo_result, demo_url);
     } else {
       return this.runCheck(checkRequest);
     }
