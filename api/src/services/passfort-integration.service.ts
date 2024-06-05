@@ -9,8 +9,7 @@ import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
-import { runDemoCheck } from '../npmPackage/formatters/OTS_CC_helpers.js';
-import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result } from '@moodys/custom-check-helpers';
+import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck } from '@moodys/custom-check-helpers';
 import { ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result } from '@moodys/custom-check-helpers';
 
 @Injectable()
@@ -36,7 +35,7 @@ export class PassFortIntegrationService {
       redirects to the correct desitination.
       */
      const demo_url: string = getExternalUrl('1');
-      return runDemoCheck(checkRequest.demo_result, demo_url);
+      return run_OTS_CC_DemoCheck(checkRequest.demo_result, demo_url, process.env.CHECK_TYPE as ResourceType);
     } else {
       return this.runCheck(checkRequest);
     }
@@ -58,7 +57,7 @@ export class PassFortIntegrationService {
     }
 
     /* 
-    This uses helper functions to make a check decision for our example check.
+    example_result is a placeholder for the decision and summary you'd return from your check.
     In a real integration, you'd make this decision based on the data you've gathered while 
     processing the check. 
     */
