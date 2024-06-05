@@ -1,8 +1,7 @@
 import { CheckRequest, ProviderConfig, Metadata } from '../types/check_request.js';
 import { plainToClass } from '@nestjs/class-transformer';
 import { validateOrReject } from '@nestjs/class-validator';
-import { CheckResponse, Decision } from '../types/check_response.js';
-import { Result } from '../types/check_response.js';
+import { Result, CheckResponse, Decision } from '../npmPackage/types/OTS_CC_CheckResponse.js';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
 // import {
@@ -68,7 +67,7 @@ const runDemoCheck = (demoResult: string): CheckResponse => {
   }
 };
 
-const getExternalUrl = (resultId: string): string => {
+export const getExternalUrl = (resultId: string): string => {
   // If urlPrefix is set, then our API base URL is always {externalUrl}/api
   // urlPrefix is just used for mounting
   const config: ConfigType<typeof appConfig> = appConfig();
@@ -86,7 +85,7 @@ const createResponseObject = async (
   const result = decideCheckResult(checkRequest.provider_config, metadata);
 
   const response: CheckResponse = plainToClass(CheckResponse, {
-    provider_data: metadata,
+    provider_data: 'Your check data here',
     warnings: [],
     errors: [],
     external_resources: [
@@ -107,7 +106,7 @@ const createResponseObject = async (
   return response;
 };
 
-const decideCheckResult = (
+export const decideCheckResult = (
   providerConfig: ProviderConfig,
   metadata: Metadata,
 ): Result => {
@@ -128,7 +127,7 @@ const decideCheckResult = (
   };
 };
 
-const decideCheckDecision = (
+export const decideCheckDecision = (
   providerConfig: ProviderConfig,
   metadata: Metadata,
 ): Decision => {

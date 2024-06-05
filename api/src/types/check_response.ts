@@ -45,11 +45,12 @@ export class ExternalResource {
 export enum Decision {
   PASS = 'PASS',
   FAIL = 'FAIL',
+  PARTIAL_PASS = 'PARTIAL',
   ERROR = 'ERROR',
 }
 
 export class Result {
-  @IsIn(['PASS', 'FAIL'])
+  @IsIn(['PASS', 'FAIL', 'PARTIAL', 'ERROR'])
   decision: Decision;
 
   @IsString()
