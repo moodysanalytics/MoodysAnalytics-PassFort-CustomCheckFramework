@@ -61,8 +61,7 @@ export class CheckResponse {
   @ValidateIf((o) => typeof o.provider_data !== 'string')
   @IsObject()
   @ValidateNested()
-  @Type(() => Metadata)
-  provider_data: Metadata | string;
+  provider_data: string;
 
   @IsArray()
   @ValidateNested({ each: true })
