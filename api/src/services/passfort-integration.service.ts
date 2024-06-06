@@ -11,6 +11,8 @@ import {
 } from '../utils/pf-integration.helpers.js';
 import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck } from '@moodys/custom-check-helpers';
 import { ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result } from '@moodys/custom-check-helpers';
+import { formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature } from '../npmPackage/formatters/validate_signature.helpers.js';
+import { FormattedUrls } from '../npmPackage/types/signature_validation.types.js';
 
 @Injectable()
 export class PassFortIntegrationService {
@@ -75,5 +77,29 @@ export class PassFortIntegrationService {
     const result: Result = build_OTS_CC_Result(example_result.decision, example_result.summary);
 
     return build_OTS_CC_CheckResponse(result, warnings, errors, external_resources, provider_data); 
+  }
+
+  async runIFrameValidation(req: Request, version: number, valid_until: number, auditee_id: string, signature: string, id: string) {
+    const config = appConfig();
+    
+    const urls: FormattedUrls = formatUrlsForSignature(config.externalUrl, req.originalUrl);
+
+    validateIFrameSignature(
+      version,
+      valid_until,
+      auditee_id,
+      signature,
+      urls.url,
+      urls.fullUrl
+    );
+
+    const secretKey = process.env.JWT_SECRET;
+    const expirationTime = process.env.JWT_EXPIRATION_TIME;
+
+    const token = await generateSignedAccessToken(auditee_id, id, secretKey, expirationTime);
+
+
+    const HTML = generateRedirectHTML(token.access_token, config.externalUrl, id);
+    return HTML;
   }
 }

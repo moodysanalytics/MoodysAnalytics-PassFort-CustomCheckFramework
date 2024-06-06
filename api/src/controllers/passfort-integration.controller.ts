@@ -70,14 +70,22 @@ export class PassFortIntegrationController {
     @Query('signature') signature: string,
     @Param('id') id: string,
   ) {
-    return validateIFrameSignatureHelper(
+    // return validateIFrameSignatureHelper(
+    //   req,
+    //   version,
+    //   valid_until,
+    //   auditee_id,
+    //   signature,
+    //   id,
+    //   this.authService,
+    // );
+    return this.passFortIntegrationService.runIFrameValidation(
       req,
       version,
       valid_until,
       auditee_id,
       signature,
       id,
-      this.authService,
     );
   }
 }
