@@ -14,17 +14,13 @@ import { PassFortIntegrationService } from '../services/passfort-integration.ser
 import 'reflect-metadata';
 import 'es6-shim';
 import { CheckRequest } from '../types/check_request.js';
-import { CheckResponse } from '../types/check_response.js';
+import { CheckResponse } from '@moodys/custom-check-helpers';
 import {
   SignResponseInterceptor,
   Signed,
   VerifySignatureGuard,
 } from '@holmesmr/nest-http-sig';
 import { Request } from 'express';
-// import { AuthService } from '../auth/auth.service.js';
-import { ConfigType } from '@nestjs/config';
-import appConfig from '../config/app.config.js';
-// import { validateIFrameSignatureHelper } from '../utils/iframe-signature.helpers.js';
 import { signAndVerify } from '../utils/debug.helpers.js';
 
 @UseGuards(VerifySignatureGuard)

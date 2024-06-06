@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { PassFortIntegrationController } from './controllers/passfort-integration.controller.js';
 import { PassFortIntegrationService } from './services/passfort-integration.service.js';
 import { SignaturesModule } from './signatures/signatures.module.js';

@@ -59,10 +59,3 @@ export class CheckRequest {
   @Type(() => ProviderConfig)
   provider_config: ProviderConfig;
 }
-
-export class AuthData {
-  access_token: string;
-  expires_in: number;
-  token_type: string;
-  refresh_token: string;
-}
