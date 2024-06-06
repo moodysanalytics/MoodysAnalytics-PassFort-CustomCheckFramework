@@ -92,3 +92,18 @@
 //       throw new UnsupportedDemoResult();
 //   }
 // };
+
+import { FormattedUrls } from '../types/signature_validation.types.js';
+export const formatUrlsForSignature = (frontendUrl: string, originalUrl: string): FormattedUrls => {
+    /*
+    OriginalUrl is the path of the request, this is available on the Express Request object as .originalUrl.
+    The frontendUrl is the URL that the iframe will be hosted on, we use an environment variable for this.
+    */
+    const extUrl = new URL(frontendUrl);
+    const fullUrl = `${extUrl.origin}${originalUrl}`;
+    const signatureStartIndex = fullUrl.indexOf('&signature');
+    return {
+        url: fullUrl.slice(0, signatureStartIndex),
+        fullUrl: fullUrl,
+    };
+}

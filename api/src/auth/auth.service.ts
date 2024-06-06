@@ -3,7 +3,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as crypto from 'crypto';
-import { BadRequestAppException, UnauthorizedAppException } from '@moodys/custom-check-helpers';
+import { BadRequestAppException, CheckErrorTypes, UnauthorizedAppException, ValidationException } from '@moodys/custom-check-helpers';
 
 @Injectable()
 export class AuthService {
@@ -15,6 +15,7 @@ export class AuthService {
     auditee_id,
     signature,
     url,
+    fullUrl,
     id,
   ) {
     this.validateIFrameSignature(
@@ -23,6 +24,7 @@ export class AuthService {
       auditee_id,
       signature,
       url,
+      fullUrl
     );
 
     return {
@@ -33,7 +35,7 @@ export class AuthService {
     };
   }
 
-  validateIFrameSignature(version, valid_until, auditee_id, signature, url) {
+  validateIFrameSignature(version, valid_until, auditee_id, signature, url, fullUrl) {
     if (
       version === undefined ||
       valid_until === undefined ||
@@ -42,6 +44,13 @@ export class AuthService {
     ) {
       throw new BadRequestAppException('Missing required query parameter(s)');
     } else {
+
+      if (fullUrl !== url + '&signature=' + encodeURIComponent(signature)) {
+        // If someone attempts to tack on paremeters after the signature, throw an error
+        // Otherwise, a malicious user could alter the valid_until, auditee_id, or version parameters
+        throw new ValidationException('Signature is invalid (tampering detected)', CheckErrorTypes.SIGNATURE_ERROR);
+      }
+
       const nowMilliseconds = Date.now();
       const validUntilMilliseconds = valid_until * 1000;
 

@@ -1,6 +1,9 @@
 import { Request } from 'express';
 import appConfig from '../config/app.config.js';
 import { AuthService } from '../auth/auth.service.js';
+import { format } from 'path';
+import { FormattedUrls } from '../npmPackage/types/signature_validation.types.js';
+import { formatUrlsForSignature } from '../npmPackage/formatters/OTS_CC_helpers.js';
 
 const config = appConfig();
 
@@ -13,19 +16,23 @@ export const validateIFrameSignatureHelper = async (
   id: string,
   authService: AuthService,
 ) => {
-  const extUrl = new URL(config.externalUrl);
-  // The "real" url is the configured external URL's protocol/domain/port (aka "origin")
-  // plus the "original URL" (aka request path).
-  const fullUrl = `${extUrl.origin}${req.originalUrl}`;
-  const signatureStartIndex = fullUrl.indexOf('&signature');
-  const url = fullUrl.slice(0, signatureStartIndex);
+  // const extUrl = new URL(config.externalUrl);
+  // // The "real" url is the configured external URL's protocol/domain/port (aka "origin")
+  // // plus the "original URL" (aka request path).
+  // const fullUrl = `${extUrl.origin}${req.originalUrl}`;
+  // const signatureStartIndex = fullUrl.indexOf('&signature');
+  // const url = fullUrl.slice(0, signatureStartIndex);
+
+  const urls: FormattedUrls = formatUrlsForSignature(config.externalUrl, req.originalUrl);
+
 
   const token = await authService.createAccessToken(
     version,
     valid_until,
     auditee_id,
     signature,
-    url,
+    urls.url,
+    urls.fullUrl,
     id,
   );
 
