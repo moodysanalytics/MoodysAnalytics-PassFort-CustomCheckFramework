@@ -2,7 +2,6 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { PassFortIntegrationController } from './controllers/passfort-integration.controller.js';
 import { PassFortIntegrationService } from './services/passfort-integration.service.js';
 import { SignaturesModule } from './signatures/signatures.module.js';
-import { FixPassFortSignatureMiddleware } from './fix-passfort-signature/fix-passfort-signature.middleware.js';
 import { AuthModule } from './auth/auth.module.js';
 import { ConfigModule } from '@nestjs/config';
 import appConfig from './config/app.config.js';
