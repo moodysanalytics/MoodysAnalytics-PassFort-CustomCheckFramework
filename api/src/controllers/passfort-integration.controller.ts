@@ -21,10 +21,10 @@ import {
   VerifySignatureGuard,
 } from '@holmesmr/nest-http-sig';
 import { Request } from 'express';
-import { AuthService } from '../auth/auth.service.js';
+// import { AuthService } from '../auth/auth.service.js';
 import { ConfigType } from '@nestjs/config';
 import appConfig from '../config/app.config.js';
-import { validateIFrameSignatureHelper } from '../utils/iframe-signature.helpers.js';
+// import { validateIFrameSignatureHelper } from '../utils/iframe-signature.helpers.js';
 import { signAndVerify } from '../utils/debug.helpers.js';
 
 @UseGuards(VerifySignatureGuard)
@@ -33,7 +33,7 @@ import { signAndVerify } from '../utils/debug.helpers.js';
 export class PassFortIntegrationController {
   @Inject(PassFortIntegrationService)
   private passFortIntegrationService: PassFortIntegrationService;
-  @Inject(AuthService) private authService: AuthService;
+  // @Inject(AuthService) private authService: AuthService;
 
   @Get('/')
   getMetadata() {
@@ -70,15 +70,6 @@ export class PassFortIntegrationController {
     @Query('signature') signature: string,
     @Param('id') id: string,
   ) {
-    // return validateIFrameSignatureHelper(
-    //   req,
-    //   version,
-    //   valid_until,
-    //   auditee_id,
-    //   signature,
-    //   id,
-    //   this.authService,
-    // );
     return this.passFortIntegrationService.runIFrameValidation(
       req,
       version,
