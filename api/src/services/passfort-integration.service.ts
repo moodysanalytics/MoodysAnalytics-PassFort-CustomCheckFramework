@@ -4,12 +4,11 @@ import { Request } from 'express';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
 import { ONE_TIME_CONFIG } from '../../static/config.js';
-import { META_DATA } from '../../static/metadata.js';
 import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
-import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls } from '@moodys/custom-check-helpers';
+import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory } from '@moodys/custom-check-helpers';
 
 @Injectable()
 export class PassFortIntegrationService {
@@ -19,7 +18,7 @@ export class PassFortIntegrationService {
   ) {}
 
   getMetadata() {
-    return META_DATA;
+    return metadataFactory('Your provider name here.');
   }
 
   getConfig() {

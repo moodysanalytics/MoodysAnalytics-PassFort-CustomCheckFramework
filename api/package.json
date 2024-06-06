@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@holmesmr/nest-http-sig": "^0.1.1-alpha.0",
-    "@moodys/custom-check-helpers": "npm:@jsr/moodys__custom-check-helpers@^0.2.4",
+    "@moodys/custom-check-helpers": "npm:@jsr/moodys__custom-check-helpers@^0.2.5",
     "@nestjs/class-transformer": "^0.4.0",
     "@nestjs/class-validator": "^0.13.1",
     "@nestjs/common": "^9.4.2",
