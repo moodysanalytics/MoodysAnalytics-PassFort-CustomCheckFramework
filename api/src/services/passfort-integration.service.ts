@@ -9,10 +9,7 @@ import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
-import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck } from '@moodys/custom-check-helpers';
-import { ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result } from '@moodys/custom-check-helpers';
-import { formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature } from '../npmPackage/formatters/validate_signature.helpers.js';
-import { FormattedUrls } from '../npmPackage/types/signature_validation.types.js';
+import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls } from '@moodys/custom-check-helpers';
 
 @Injectable()
 export class PassFortIntegrationService {
@@ -84,13 +81,16 @@ export class PassFortIntegrationService {
     
     const urls: FormattedUrls = formatUrlsForSignature(config.externalUrl, req.originalUrl);
 
+    const key: string = process.env.INTEGRATION_SECRET_KEY;
+
     validateIFrameSignature(
       version,
       valid_until,
       auditee_id,
       signature,
       urls.url,
-      urls.fullUrl
+      urls.fullUrl,
+      key
     );
 
     const secretKey = process.env.JWT_SECRET;
