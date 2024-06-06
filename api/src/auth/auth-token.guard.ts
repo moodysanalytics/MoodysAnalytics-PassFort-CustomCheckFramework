@@ -3,13 +3,11 @@ import {
   ExecutionContext,
   Injectable,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
-import { UnauthorizedAppException } from '@moodys/custom-check-helpers';
+import { UnauthorizedAppException, verifyAsync } from '@moodys/custom-check-helpers';
 
 @Injectable()
 export class AuthTokenGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const debug: string = process.env.DEBUG;
@@ -19,14 +17,9 @@ export class AuthTokenGuard implements CanActivate {
     } else {
       const request = context.switchToHttp().getRequest();
       const token = this.extractTokenFromHeader(request);
-      if (!token) {
-        throw new UnauthorizedAppException('Missing token in header of request');
-      }
       try {
-        const payload = await this.jwtService.verifyAsync(token, {
-          secret: process.env.JWT_SECRET,
-        });
-        // 💡 We're assigning the payload to the request object here
+        const payload = await verifyAsync(token, process.env.JWT_SECRET);
+        // We're assigning the payload to the request object here
         // so that we can access it in our route handlers
         request['token'] = payload;
       } catch {
@@ -38,6 +31,9 @@ export class AuthTokenGuard implements CanActivate {
 
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+    if (type !== 'Bearer') {
+      throw new UnauthorizedAppException('Missing token in header of request');
+    }
+    return token;
   }
 }
