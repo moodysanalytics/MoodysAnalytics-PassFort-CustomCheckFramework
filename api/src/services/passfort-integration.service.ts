@@ -8,7 +8,8 @@ import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
-import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory } from '@moodys/custom-check-helpers';
+import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory, OTS_CC_CheckConfigType } from '@moodys/custom-check-helpers';
+
 
 @Injectable()
 export class PassFortIntegrationService {
@@ -22,7 +23,41 @@ export class PassFortIntegrationService {
   }
 
   getConfig() {
-    return ONE_TIME_CONFIG;
+    const config: OTS_CC_CheckConfigType = {
+      check_type: 'COMPANY_CUSTOM',
+      check_template: {
+        timeout: 60,
+        type: 'ONE_TIME_SYNCHRONOUS',
+      },
+      pricing: {
+        supports_reselling: false,
+      },
+      supported_countries: ['USA', 'GBR'],
+      supported_features: [
+        process.env.CHECK_TYPE === "LINK" ? "EXTERNAL_LINK" : "EXTERNAL_EMBED",
+      ],
+      credentials: {
+        fields: [],
+      },
+      config: {
+        fields: [
+          {
+            type: 'string',
+            name: 'country_of_inc_rule',
+            label: 'Country of incorporation to pass check',
+            options: [{
+              label: "USA",
+              value: "USA"
+              },
+              {
+              label: "GBR",
+              value: "GBR"
+              }]
+            }]
+        },
+    };
+
+    return config;
   }
 
   async runChecks(req: Request, checkRequest: CheckRequest) {
