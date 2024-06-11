@@ -7,7 +7,7 @@ import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
-import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory, OTS_CC_CheckConfigType, OTS_CC_CheckRequestType } from '@moodys/custom-check-helpers';
+import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, OTS_CC_CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory, OTS_CC_CheckConfigType, OTS_CC_CheckRequestType } from '@moodys/custom-check-helpers';
 
 
 @Injectable()
@@ -59,7 +59,7 @@ export class PassFortIntegrationService {
     return config;
   }
 
-  async runChecks(req: Request, checkRequest: OTS_CC_CheckRequestType): Promise<CheckResponse> {
+  async runChecks(req: Request, checkRequest: OTS_CC_CheckRequestType): Promise<OTS_CC_CheckResponse> {
     if (checkRequest.demo_result) {
 
       /*
@@ -73,7 +73,7 @@ export class PassFortIntegrationService {
     }
   }
 
-  async runCheck(checkRequest: OTS_CC_CheckRequestType): Promise<CheckResponse> {
+  async runCheck(checkRequest: OTS_CC_CheckRequestType): Promise<OTS_CC_CheckResponse> {
     const metadata = checkRequest.check_input.metadata;
 
     /* 

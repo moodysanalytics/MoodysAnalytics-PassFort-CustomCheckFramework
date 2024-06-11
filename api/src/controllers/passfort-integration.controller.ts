@@ -14,7 +14,7 @@ import { PassFortIntegrationService } from '../services/passfort-integration.ser
 import 'reflect-metadata';
 import 'es6-shim';
 // import { CheckRequest } from '../types/check_request.js';
-import { CheckResponse, OTS_CC_CheckRequestType } from '@moodys/custom-check-helpers';
+import { OTS_CC_CheckResponse, OTS_CC_CheckRequestType } from '@moodys/custom-check-helpers';
 import {
   SignResponseInterceptor,
   Signed,
@@ -53,7 +53,7 @@ export class PassFortIntegrationController {
   async check(
     @Req() req: Request,
     @Body() checkRequest: OTS_CC_CheckRequestType,
-  ): Promise<CheckResponse> {
+  ): Promise<OTS_CC_CheckResponse> {
     return this.passFortIntegrationService.runChecks(req, checkRequest);
   }
 
