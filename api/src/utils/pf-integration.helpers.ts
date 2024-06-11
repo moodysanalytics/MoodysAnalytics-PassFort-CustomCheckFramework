@@ -1,7 +1,7 @@
-import { ProviderConfig, Metadata } from '../types/check_request.js';
-import { Result, Decision } from '@moodys/custom-check-helpers';
+import { Result, Decision, BadRequestAppException } from '@moodys/custom-check-helpers';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
+import { RequestProviderConfig, RequestMetadata } from '../npmPackage/types/OTS_CC_CheckRequest.types.js';
 
 /*
 These are helpers made specifically for this skeleton. 
@@ -20,8 +20,8 @@ export const getExternalUrl = (resultId: string): string => {
 };
 
 export const decideCheckResult = (
-  providerConfig: ProviderConfig,
-  metadata: Metadata,
+  providerConfig: RequestProviderConfig,
+  metadata: RequestMetadata,
 ): Result => {
   // Customize what PassFort will display regarding your check results
   const decision = decideCheckDecision(providerConfig, metadata);
@@ -41,9 +41,12 @@ export const decideCheckResult = (
 };
 
 export const decideCheckDecision = (
-  providerConfig: ProviderConfig,
-  metadata: Metadata,
+  providerConfig: RequestProviderConfig,
+  metadata: RequestMetadata,
 ): Decision => {
+  if (!providerConfig.country_of_inc_rule) {
+    throw new BadRequestAppException('Country of incorporation rule is required in this dummy check.');
+   }
   const checkRule = providerConfig.country_of_inc_rule;
 
   if (checkRule === metadata.country_of_incorporation) {

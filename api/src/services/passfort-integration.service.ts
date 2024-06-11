@@ -1,14 +1,14 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CheckRequest } from '../types/check_request.js';
+// import { CheckRequest } from '../types/check_request.js';
 import { Request } from 'express';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
-import { ONE_TIME_CONFIG } from '../../static/config.js';
 import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
 import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory, OTS_CC_CheckConfigType } from '@moodys/custom-check-helpers';
+import { OTS_CC_CheckRequestType } from '../npmPackage/types/OTS_CC_CheckRequest.types.js';
 
 
 @Injectable()
@@ -60,7 +60,7 @@ export class PassFortIntegrationService {
     return config;
   }
 
-  async runChecks(req: Request, checkRequest: CheckRequest) {
+  async runChecks(req: Request, checkRequest: OTS_CC_CheckRequestType): Promise<CheckResponse> {
     if (checkRequest.demo_result) {
 
       /*
@@ -74,7 +74,7 @@ export class PassFortIntegrationService {
     }
   }
 
-  async runCheck(checkRequest: CheckRequest): Promise<CheckResponse> {
+  async runCheck(checkRequest: OTS_CC_CheckRequestType): Promise<CheckResponse> {
     const metadata = checkRequest.check_input.metadata;
 
     /* 

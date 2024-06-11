@@ -13,7 +13,7 @@ import {
 import { PassFortIntegrationService } from '../services/passfort-integration.service.js';
 import 'reflect-metadata';
 import 'es6-shim';
-import { CheckRequest } from '../types/check_request.js';
+// import { CheckRequest } from '../types/check_request.js';
 import { CheckResponse } from '@moodys/custom-check-helpers';
 import {
   SignResponseInterceptor,
@@ -22,6 +22,7 @@ import {
 } from '@holmesmr/nest-http-sig';
 import { Request } from 'express';
 import { signAndVerify } from '../utils/debug.helpers.js';
+import { OTS_CC_CheckRequestType } from '../npmPackage/types/OTS_CC_CheckRequest.types.js';
 
 @UseGuards(VerifySignatureGuard)
 @UseInterceptors(SignResponseInterceptor)
@@ -52,7 +53,7 @@ export class PassFortIntegrationController {
   @Post('/checks')
   async check(
     @Req() req: Request,
-    @Body() checkRequest: CheckRequest,
+    @Body() checkRequest: OTS_CC_CheckRequestType,
   ): Promise<CheckResponse> {
     return this.passFortIntegrationService.runChecks(req, checkRequest);
   }
