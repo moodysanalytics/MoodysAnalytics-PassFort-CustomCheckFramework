@@ -13,7 +13,6 @@ import {
 import { PassFortIntegrationService } from '../services/passfort-integration.service.js';
 import 'reflect-metadata';
 import 'es6-shim';
-// import { CheckRequest } from '../types/check_request.js';
 import { OTS_CC_CheckResponse, OTS_CC_CheckRequestType } from '@moodys/custom-check-helpers';
 import {
   SignResponseInterceptor,
@@ -29,7 +28,6 @@ import { signAndVerify } from '../utils/debug.helpers.js';
 export class PassFortIntegrationController {
   @Inject(PassFortIntegrationService)
   private passFortIntegrationService: PassFortIntegrationService;
-  // @Inject(AuthService) private authService: AuthService;
 
   @Get('/')
   getMetadata() {

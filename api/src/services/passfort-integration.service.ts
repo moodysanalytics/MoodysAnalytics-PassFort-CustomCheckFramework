@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-// import { CheckRequest } from '../types/check_request.js';
 import { Request } from 'express';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
