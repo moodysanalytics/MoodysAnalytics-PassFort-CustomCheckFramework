@@ -1,7 +1,6 @@
-import { Result, Decision, BadRequestAppException } from '@moodys/custom-check-helpers';
+import { Result, Decision, BadRequestAppException, RequestProviderConfig, RequestMetadata } from '@moodys/custom-check-helpers';
 import appConfig from '../config/app.config.js';
 import { ConfigType } from '@nestjs/config';
-import { RequestProviderConfig, RequestMetadata } from '../npmPackage/types/OTS_CC_CheckRequest.types.js';
 
 /*
 These are helpers made specifically for this skeleton. 

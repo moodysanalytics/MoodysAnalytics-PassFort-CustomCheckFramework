@@ -14,7 +14,7 @@ import { PassFortIntegrationService } from '../services/passfort-integration.ser
 import 'reflect-metadata';
 import 'es6-shim';
 // import { CheckRequest } from '../types/check_request.js';
-import { CheckResponse } from '@moodys/custom-check-helpers';
+import { CheckResponse, OTS_CC_CheckRequestType } from '@moodys/custom-check-helpers';
 import {
   SignResponseInterceptor,
   Signed,
@@ -22,7 +22,6 @@ import {
 } from '@holmesmr/nest-http-sig';
 import { Request } from 'express';
 import { signAndVerify } from '../utils/debug.helpers.js';
-import { OTS_CC_CheckRequestType } from '../npmPackage/types/OTS_CC_CheckRequest.types.js';
 
 @UseGuards(VerifySignatureGuard)
 @UseInterceptors(SignResponseInterceptor)

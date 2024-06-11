@@ -7,8 +7,7 @@ import {
   getExternalUrl,
   decideCheckResult,
 } from '../utils/pf-integration.helpers.js';
-import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory, OTS_CC_CheckConfigType } from '@moodys/custom-check-helpers';
-import { OTS_CC_CheckRequestType } from '../npmPackage/types/OTS_CC_CheckRequest.types.js';
+import { build_OTS_CC_CheckResponse, build_OTS_CC_ExternalResource, build_OTS_CC_Result, run_OTS_CC_DemoCheck, ExternalResource, ResourceType, CheckResponse, PassFortWarning, Result, formatUrlsForSignature, generateRedirectHTML, generateSignedAccessToken, validateIFrameSignature, FormattedUrls, metadataFactory, OTS_CC_CheckConfigType, OTS_CC_CheckRequestType } from '@moodys/custom-check-helpers';
 
 
 @Injectable()
